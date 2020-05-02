@@ -1,6 +1,9 @@
 import React from 'react';
-import './App.css';
 import * as firebase from 'firebase'
+
+import './App.css';
+import { useAuth0 } from "./utils/auth0";
+import NavBar from "./components/NavBar";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDFulch9S_hXrOKzo0nOV54CZh3vW11nog",
@@ -13,23 +16,17 @@ const firebaseConfig = {
 };
 
 function App() {
-  firebase.initializeApp(firebaseConfig);
+  //firebase.initializeApp(firebaseConfig);
+
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
     </div>
   );
 }
