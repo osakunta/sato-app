@@ -1,22 +1,12 @@
 import React from 'react';
-import * as firebase from 'firebase'
 
 import './App.css';
+import firebase from './utils/firebase'
 import { useAuth0 } from "./utils/auth0";
 import NavBar from "./components/NavBar";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDFulch9S_hXrOKzo0nOV54CZh3vW11nog",
-  authDomain: "satakuntatalo-services.firebaseapp.com",
-  databaseURL: "https://satakuntatalo-services.firebaseio.com",
-  projectId: "satakuntatalo-services",
-  storageBucket: "satakuntatalo-services.appspot.com",
-  messagingSenderId: "513995870934",
-  appId: "1:513995870934:web:d02b227e44d2f24e"
-};
-
 function App() {
-  //firebase.initializeApp(firebaseConfig);
+  console.log(firebase);
 
   const { loading } = useAuth0();
 
