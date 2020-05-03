@@ -13,11 +13,15 @@ node_modules/
 
 # misc
 .DS_Store
+.envrc
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.runtimeconfig.json
+.runtimecredentials.json
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+database-debug.log*

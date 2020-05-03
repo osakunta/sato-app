@@ -26,3 +26,25 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Setup local development environment
+
+To get the firebase CLI run:
+
+    npm install -g firebase-tools
+
+### Cloud Functions
+
+Cloud functions that reside in the `functions/` directory. They need the environment variables from the production environment which can be downloaded with:
+
+    firebase functions:config:get > functions/.runtimeconfig.json
+
+Download a new private key for Firbase Admin SDK from the Firebase console and add them as file `functions/.runtimecredentials.json`. Then set the following to your environment (e.g. with `direnv` to file `.envrc`):
+
+    export GOOGLE_APPLICATION_CREDENTIALS="functions/.runtimecredentials.json"
+
+### Start emulators
+
+To start emulating Firebase services on your local environment run:
+
+    firebase emulators:start
