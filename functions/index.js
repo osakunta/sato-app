@@ -1,8 +1,10 @@
 const functions = require('firebase-functions');
+const setupAuthClient = require('./gallery/auth');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+const galleryClient = setupAuthClient()
+
+exports.albums = functions.https.onRequest(async (request, response) => {
+  const url = 'https://photoslibrary.googleapis.com/v1/albums';
+  const res = await galleryClient.request({ url });
+  response.send(res.data);
+});
