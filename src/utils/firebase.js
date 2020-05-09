@@ -1,4 +1,3 @@
-// Config file
 import * as firebase from "firebase";
 
 const firebaseConfig = {
@@ -12,9 +11,8 @@ const firebaseConfig = {
   measurementId: "G-0TTY03C7Z3"
 };
 
-export default !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
-console.log(firebase.name);
-console.log(firebase.database());
+export default function initFirebase() {
+  !firebase.apps.length
+    ? firebase.initializeApp(firebaseConfig)
+    : firebase.app();
+}
