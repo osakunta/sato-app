@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
-const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(
+const DEFAULT_REDIRECT = () => window.history.replaceState(
   {}, document.title, window.location.pathname,
 );
 
 export const Auth0Context = React.createContext();
 export const useAuth0 = () => useContext(Auth0Context);
+
 export const Auth0Provider = ({
-  children,
-  onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
-  ...initOptions
+  children, onRedirectCallback = DEFAULT_REDIRECT, ...initOptions
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState();
   const [user, setUser] = useState();
@@ -31,13 +31,14 @@ export const Auth0Provider = ({
         onRedirectCallback(appState);
       }
 
-      const isAuthenticated = await auth0FromHook.isAuthenticated();
+      const fetchedIsAuthenticated = await auth0FromHook.isAuthenticated();
 
-      setIsAuthenticated(isAuthenticated);
+      setIsAuthenticated(fetchedIsAuthenticated);
 
-      if (isAuthenticated) {
-        const user = await auth0FromHook.getUser();
-        setUser(user);
+      if (fetchedIsAuthenticated) {
+        const fetchedUser = await auth0FromHook.getUser();
+
+        setUser(fetchedUser);
       }
 
       setLoading(false);
@@ -58,19 +59,21 @@ export const Auth0Provider = ({
       setPopupOpen(false);
     }
 
-    const user = await auth0Client.getUser();
+    const fetchedUser = await auth0Client.getUser();
 
-    setUser(user);
+    setUser(fetchedUser);
     setIsAuthenticated(true);
   };
 
   const handleRedirectCallback = async () => {
     setLoading(true);
     await auth0Client.handleRedirectCallback();
-    const user = await auth0Client.getUser();
+
+    const fetchedUser = await auth0Client.getUser();
+
     setLoading(false);
     setIsAuthenticated(true);
-    setUser(user);
+    setUser(fetchedUser);
   };
 
   return (
@@ -92,4 +95,9 @@ export const Auth0Provider = ({
       {children}
     </Auth0Context.Provider>
   );
+};
+
+Auth0Provider.propTypes = {
+  children: PropTypes.node.isRequired,
+  onRedirectCallback: PropTypes.func.isRequired,
 };

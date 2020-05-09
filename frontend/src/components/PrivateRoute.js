@@ -1,4 +1,6 @@
+/* eslint react/jsx-props-no-spreading: 0 */
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import { useAuth0 } from '../utils/auth0';
 
@@ -22,6 +24,11 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
   );
 
   return <Route path={path} render={render} {...rest} />;
+};
+
+PrivateRoute.propTypes = {
+  component: PropTypes.element.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default PrivateRoute;

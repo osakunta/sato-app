@@ -4,8 +4,8 @@ import { useAuth0 } from '../utils/auth0';
 const NavBar = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-  const loginButton = <button onClick={() => loginWithRedirect({})}>Login</button>;
-  const logoutButton = <button onClick={() => logout()}>Logout</button>;
+  const loginButton = <button type="button" onClick={() => loginWithRedirect({})}>Login</button>;
+  const logoutButton = <button type="button" onClick={() => logout()}>Logout</button>;
 
   return (
     <div>
