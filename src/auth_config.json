@@ -1,4 +1,5 @@
 {
   "domain": "osakunta.eu.auth0.com",
-  "clientId": "0SgzflKCwgH4D0Vya8JcSoX5s5N25dOV"
+  "clientId": "0SgzflKCwgH4D0Vya8JcSoX5s5N25dOV",
+  "audience": "https://europe-west3-satakuntatalo-services.cloudfunctions.net"
 }
