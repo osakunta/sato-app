@@ -21,6 +21,4 @@ app.get('/albums', async (req, res) => {
   res.send(photosRes.data);
 });
 
-module.exports = {
-  app,
-};
+module.exports = app;
