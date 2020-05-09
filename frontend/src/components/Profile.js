@@ -15,7 +15,7 @@ const Profile = () => {
     try {
       const token = await getTokenSilently();
 
-      const response = await fetch('http://localhost:5001/satakuntatalo-services/europe-west3/backend/authorized', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/gallery/authorized`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
