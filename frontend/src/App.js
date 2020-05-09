@@ -7,6 +7,7 @@ import { useAuth0 } from './utils/auth0';
 import history from './utils/history';
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './components/Profile';
+import Gallery from './components/pages/Gallery';
 import NavBar from './components/NavBar';
 
 function App() {
@@ -23,9 +24,11 @@ function App() {
       <Router history={history}>
         <NavBar />
         <Link to="/profile">Profile</Link>
+        <Link to="/gallery">Gallery</Link>
         <Switch>
           <Route path="/" exact />
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/gallery" component={Gallery} />
         </Switch>
       </Router>
     </div>

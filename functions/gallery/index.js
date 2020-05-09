@@ -9,13 +9,12 @@ const app = express();
 app.use(authMiddleware);
 app.use(corsMiddleware);
 
-app.get('/authorized', (req, res) => {
-  console.log(req);
-  res.send('Secured Resource');
-});
+const PHOTOS_API = 'https://photoslibrary.googleapis.com/v1';
+
+const apiUrl = (endpoint) => `${PHOTOS_API}/${endpoint}`;
 
 app.get('/albums', async (req, res) => {
-  const url = 'https://photoslibrary.googleapis.com/v1/albums';
+  const url = apiUrl('albums');
   const photosRes = await galleryClient.request({ url });
 
   res.send(photosRes.data);
