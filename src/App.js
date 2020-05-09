@@ -5,6 +5,7 @@ import './App.css';
 import firebase from './utils/firebase'
 import { useAuth0 } from "./utils/auth0";
 import history from "./utils/history";
+import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
 import NavBar from "./components/NavBar";
 
@@ -24,7 +25,7 @@ function App() {
         <Link to="/profile">Profile</Link>
         <Switch>
           <Route path="/" exact />
-          <Route path="/profile" component={Profile} />
+          <PrivateRoute path="/profile" component={Profile} />
         </Switch>
       </Router>
     </div>
