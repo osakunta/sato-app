@@ -1,10 +1,5 @@
 const functions = require('firebase-functions');
-const setupAuthClient = require('./gallery/auth');
 
-const galleryClient = setupAuthClient()
+const gallery = require('./gallery');
 
-exports.albums = functions.https.onRequest(async (request, response) => {
-  const url = 'https://photoslibrary.googleapis.com/v1/albums';
-  const res = await galleryClient.request({ url });
-  response.send(res.data);
-});
+exports.gallery = functions.region('europe-west3').https.onRequest(gallery);
