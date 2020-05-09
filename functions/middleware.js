@@ -7,11 +7,11 @@ const authMiddleware = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: 'https://osakunta.eu.auth0.com/.well-known/jwks.json'
+    jwksUri: 'https://osakunta.eu.auth0.com/.well-known/jwks.json',
   }),
   audience: 'https://europe-west3-satakuntatalo-services.cloudfunctions.net',
   issuer: 'https://osakunta.eu.auth0.com/',
-  algorithms: ['RS256']
+  algorithms: ['RS256'],
 });
 
 const corsMiddleware = cors({
@@ -21,4 +21,4 @@ const corsMiddleware = cors({
 module.exports = {
   authMiddleware,
   corsMiddleware,
-}
+};

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { authMiddleware, corsMiddleware } = require('../middleware')
+const { authMiddleware, corsMiddleware } = require('../middleware');
 const setupAuthClient = require('./auth');
 
 const galleryClient = setupAuthClient();
@@ -9,7 +9,7 @@ const app = express();
 app.use(authMiddleware);
 app.use(corsMiddleware);
 
-app.get('/authorized', function (req, res) {
+app.get('/authorized', (req, res) => {
   console.log(req);
   res.send('Secured Resource');
 });

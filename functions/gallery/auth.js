@@ -2,14 +2,14 @@ const functions = require('firebase-functions');
 const { OAuth2Client } = require('google-auth-library');
 
 const initial_tokens = {
-  refresh_token: functions.config().gallery.refresh_token
-}
+  refresh_token: functions.config().gallery.refresh_token,
+};
 
 module.exports = function setupAuthClient() {
   const oAuth2Client = new OAuth2Client(
     functions.config().gallery.client_id,
     functions.config().gallery.client_secret,
-    'http://localhost:8888/oauth2callback'
+    'http://localhost:8888/oauth2callback',
   );
 
   oAuth2Client.on('tokens', (tokens) => {
@@ -21,4 +21,4 @@ module.exports = function setupAuthClient() {
   oAuth2Client.setCredentials(initial_tokens);
 
   return oAuth2Client;
-}
+};

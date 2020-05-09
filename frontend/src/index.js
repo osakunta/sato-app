@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Auth0Provider } from "./utils/auth0";
-import history from "./utils/history";
-import config from "./auth_config.json";
+import { Auth0Provider } from './utils/auth0';
+import history from './utils/history';
+import config from './auth_config.json';
 
-const onRedirectCallback = appState => {
+const onRedirectCallback = (appState) => {
   history.push(
     appState && appState.targetUrl
       ? appState.targetUrl
-      : window.location.pathname
+      : window.location.pathname,
   );
 };
 
@@ -21,10 +21,11 @@ ReactDOM.render(
     client_id={config.clientId}
     audience={config.audience}
     redirect_uri={window.location.origin}
-    onRedirectCallback={onRedirectCallback}>
+    onRedirectCallback={onRedirectCallback}
+  >
     <App />
   </Auth0Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

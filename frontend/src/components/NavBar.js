@@ -1,5 +1,5 @@
-import React from "react";
-import { useAuth0 } from "../utils/auth0";
+import React from 'react';
+import { useAuth0 } from '../utils/auth0';
 
 const NavBar = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
