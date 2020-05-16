@@ -20,9 +20,7 @@ async function get(endpoint, token) {
 const list = async (token) => {
   const response = await get('albums', token);
 
-  console.log(response);
-
-  return response;
+  return response.data.albums;
 };
 
 export default {
