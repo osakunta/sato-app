@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import './index.css';
 import App from './App';
 import { Auth0Provider } from './utils/auth0';
@@ -22,6 +24,7 @@ ReactDOM.render(
     redirect_uri={window.location.origin}
     onRedirectCallback={onRedirectCallback}
   >
+    <CssBaseline />
     <App />
   </Auth0Provider>,
   document.getElementById('root'),
