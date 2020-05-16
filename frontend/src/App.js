@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router, Route, Switch, Link } from 'react-router-dom';
 
-import './App.css';
 import initFirebase from './utils/firebase';
 import { useAuth0 } from './utils/auth0';
 import history from './utils/history';
+import Container from './components/basic/Container';
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './components/Profile';
 import Gallery from './components/pages/Gallery';
@@ -20,7 +20,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <Container>
       <Router history={history}>
         <NavBar />
         <Link to="/profile">Profile</Link>
@@ -31,7 +31,7 @@ function App() {
           <PrivateRoute path="/gallery" component={Gallery} />
         </Switch>
       </Router>
-    </div>
+    </Container>
   );
 }
 
