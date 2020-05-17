@@ -1,14 +1,14 @@
 import React from 'react';
-import { Router, Route, Switch, Link } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 
-import initFirebase from './utils/firebase';
-import { useAuth0 } from './utils/auth0';
-import history from './utils/history';
-import Container from './components/basic/Container';
-import PrivateRoute from './components/PrivateRoute';
-import Profile from './components/Profile';
-import Gallery from './components/pages/Gallery';
-import NavBar from './components/NavBar';
+import initFirebase from 'utils/firebase';
+import { useAuth0 } from 'utils/auth0';
+import history from 'utils/history';
+import Container from 'components/basic/Container';
+import PrivateRoute from 'components/PrivateRoute';
+import Profile from 'components/Profile';
+import Gallery from 'components/pages/Gallery';
+import NavBar from 'components/layout/NavBar';
 
 function App() {
   initFirebase();
@@ -23,8 +23,6 @@ function App() {
     <Container>
       <Router history={history}>
         <NavBar />
-        <Link to="/profile">Profile</Link>
-        <Link to="/gallery">Gallery</Link>
         <Switch>
           <Route path="/" exact />
           <PrivateRoute path="/profile" component={Profile} />
