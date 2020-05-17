@@ -5,7 +5,7 @@ import MaterialAppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
-import colors from 'utils/colors';
+import colors from 'styles/colors';
 
 const StyledAppBar = styled(MaterialAppBar)`
   background-color: ${colors.primary};

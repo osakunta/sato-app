@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import './index.css';
+import GlobalStyle from 'styles/global';
 import App from './App';
 import { Auth0Provider } from './utils/auth0';
 import history from './utils/history';
@@ -25,6 +25,7 @@ ReactDOM.render(
     onRedirectCallback={onRedirectCallback}
   >
     <CssBaseline />
+    <GlobalStyle />
     <App />
   </Auth0Provider>,
   document.getElementById('root'),
