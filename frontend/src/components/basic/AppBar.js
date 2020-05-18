@@ -6,9 +6,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import colors from 'styles/colors';
+import Container from 'components/basic/Container';
 
 const StyledAppBar = styled(MaterialAppBar)`
   background-color: ${colors.primary};
+`;
+
+const StyledToolbar = styled(Toolbar)`
+  padding: 0;
 `;
 
 function ElevationScroll({ children }) {
@@ -31,9 +36,11 @@ function AppBar({ children }) {
     <>
       <ElevationScroll>
         <StyledAppBar>
-          <Toolbar>
-            {children}
-          </Toolbar>
+          <Container>
+            <StyledToolbar>
+              {children}
+            </StyledToolbar>
+          </Container>
         </StyledAppBar>
       </ElevationScroll>
       <Toolbar />
