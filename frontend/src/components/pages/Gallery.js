@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-import { useAuth0 } from 'utils/auth0';
 import galleryService from 'services/gallery';
 
 const Gallery = () => {
-  const { getTokenSilently } = useAuth0();
   const [albums, setAlbums] = useState([]);
 
   const listAlbums = albums.map((album) => (<li key={album.id}>{album.title}</li>));
 
   useEffect(() => {
     (async () => {
-      const token = await getTokenSilently();
-
       try {
-        const fetchedAlbums = await galleryService.list(token);
+        const fetchedAlbums = await galleryService.list();
 
         setAlbums(fetchedAlbums);
       } catch (error) {

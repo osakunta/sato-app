@@ -6,6 +6,10 @@ const DEFAULT_REDIRECT = () => window.history.replaceState(
   {}, document.title, window.location.pathname,
 );
 
+let client;
+
+export const getToken = () => client.getTokenSilently();
+
 export const Auth0Context = React.createContext();
 export const useAuth0 = () => useContext(Auth0Context);
 
@@ -23,6 +27,8 @@ export const Auth0Provider = ({
       const auth0FromHook = await createAuth0Client(initOptions);
 
       setAuth0(auth0FromHook);
+
+      client = auth0FromHook;
 
       if (window.location.search.includes('code=')
         && window.location.search.includes('state=')) {
