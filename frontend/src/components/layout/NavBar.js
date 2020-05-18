@@ -14,6 +14,7 @@ const Title = styled.span`
 
 const Link = styled(RouterLink)`
   color: white;
+  text-decoration: none;
 `;
 
 const NavBar = () => {
@@ -24,15 +25,20 @@ const NavBar = () => {
 
   return (
     <AppBar>
-      <Title variant="h6">
-        Satakuntalainen Osakunta
+      <Title>
+        <Link to="/">
+          Satakuntalainen Osakunta
+        </Link>
       </Title>
+
       <Link to="/profile">
         <Button>Profile</Button>
       </Link>
+
       <Link to="/gallery">
         <Button>Gallery</Button>
       </Link>
+
       {isAuthenticated ? logoutButton : loginButton}
     </AppBar>
   );
