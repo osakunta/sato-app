@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useAuth0 } from '../utils/auth0';
+
+import { useAuth0 } from 'utils/auth0';
 
 const Profile = () => {
   const [showResult, setShowResult] = useState(false);

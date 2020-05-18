@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth0 } from '../../utils/auth0';
-import galleryService from '../../services/gallery';
+
+import { useAuth0 } from 'utils/auth0';
+import galleryService from 'services/gallery';
 
 const Gallery = () => {
   const { getTokenSilently } = useAuth0();
