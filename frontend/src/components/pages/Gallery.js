@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import galleryService from 'services/gallery';
+
+function albumEntry(album) {
+  return (
+    <li key={album.id}>
+      <Link to={`/gallery/${album.id}`}>{album.title}</Link>
+    </li>
+  );
+}
 
 const Gallery = () => {
   const [albums, setAlbums] = useState([]);
 
-  const listAlbums = albums.map((album) => (<li key={album.id}>{album.title}</li>));
+  const listAlbums = albums.map((album) => albumEntry(album));
 
   useEffect(() => {
     (async () => {

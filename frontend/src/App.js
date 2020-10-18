@@ -8,6 +8,7 @@ import Container from 'components/basic/Container';
 import PrivateRoute from 'components/PrivateRoute';
 import Profile from 'components/Profile';
 import Gallery from 'components/pages/Gallery';
+import Album from 'components/pages/Album';
 import NavBar from 'components/layout/NavBar';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Switch>
           <Route path="/" exact />
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/gallery/:albumId" component={Album} />
           <PrivateRoute path="/gallery" component={Gallery} />
         </Switch>
       </Router>

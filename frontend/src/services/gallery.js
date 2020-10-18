@@ -27,6 +27,13 @@ const list = async () => {
   return response.data.albums;
 };
 
+const getAlbum = async (albumId) => {
+  const response = await get(`albums/${albumId}`);
+
+  return response.data;
+};
+
 export default {
   list,
+  getAlbum,
 };
