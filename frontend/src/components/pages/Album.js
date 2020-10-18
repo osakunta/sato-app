@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import Button from 'components/basic/Button';
+
 import galleryService from 'services/gallery';
 
 function imageEntry(image) {
@@ -42,9 +44,9 @@ const Album = () => {
 
   const getMoreButton = nextPageToken
     ? (
-      <button type="button" onClick={getMoreImages}>
+      <Button variant="contained" color="primary" onClick={getMoreImages}>
         Näytä lisää
-      </button>
+      </Button>
     )
     : null;
 
@@ -63,18 +65,16 @@ const Album = () => {
         console.error(error);
       }
     })();
-  }, []);
+  }, [albumId]);
 
   return (
     <div>
       <h1>{albumName} ({imageCount})</h1>
 
       <div style={{ textAlign: 'center' }}>
-        {listImages}
+        <div>{listImages}</div>
+        {getMoreButton}
       </div>
-
-
-      {getMoreButton}
     </div>
   );
 };
