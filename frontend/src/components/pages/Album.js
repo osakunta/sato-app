@@ -5,7 +5,12 @@ import galleryService from 'services/gallery';
 
 function imageEntry(image) {
   return (
-    <img key={image.id} alt={image.filename} src={image.baseUrl} style={{ margin: '5px' }} />
+    <img
+      key={image.id}
+      alt={image.filename}
+      src={`${image.baseUrl}=h256`}
+      style={{ margin: '5px' }}
+    />
   );
 }
 
@@ -18,13 +23,13 @@ const Album = () => {
 
   const listImages = images.map((image) => imageEntry(image));
 
-  async function getMoreImages(id, token) {
+  async function getMoreImages() {
     if (!nextPageToken) {
       return;
     }
 
     try {
-      const fetchedImages = await galleryService.getAlbum(id, token);
+      const fetchedImages = await galleryService.getAlbum(albumId, nextPageToken);
 
       console.log(fetchedImages);
 
@@ -34,6 +39,14 @@ const Album = () => {
       console.error(error);
     }
   }
+
+  const getMoreButton = nextPageToken
+    ? (
+      <button type="button" onClick={getMoreImages}>
+        Näytä lisää
+      </button>
+    )
+    : null;
 
   useEffect(() => {
     (async () => {
@@ -56,9 +69,12 @@ const Album = () => {
     <div>
       <h1>{albumName} ({imageCount})</h1>
 
-      {listImages}
+      <div style={{ textAlign: 'center' }}>
+        {listImages}
+      </div>
 
-      <button type="button" onClick={() => getMoreImages(albumId, nextPageToken)}>Lataa lisää</button>
+
+      {getMoreButton}
     </div>
   );
 };
