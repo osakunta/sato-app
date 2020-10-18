@@ -21,14 +21,22 @@ async function get(endpoint) {
   }
 }
 
-const list = async () => {
-  const response = await get('albums');
+const list = async (pageToken) => {
+  const endpoint = pageToken
+    ? `albums?pageToken=${pageToken}`
+    : 'albums';
+
+  const response = await get(endpoint);
 
   return response.data.albums;
 };
 
-const getAlbum = async (albumId) => {
-  const response = await get(`albums/${albumId}`);
+const getAlbum = async (albumId, pageToken) => {
+  const endpoint = pageToken
+    ? `albums/${albumId}?pageToken=${pageToken}`
+    : `albums/${albumId}`;
+
+  const response = await get(endpoint);
 
   return response.data;
 };

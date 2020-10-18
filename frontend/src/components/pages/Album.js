@@ -12,21 +12,40 @@ function imageEntry(image) {
 const Album = () => {
   const { albumId } = useParams();
   const [images, setImages] = useState([]);
-  const [imageCount, setImageCount] = useState([]);
-  const [albumName, setAlbumName] = useState([]);
+  const [imageCount, setImageCount] = useState(null);
+  const [albumName, setAlbumName] = useState(null);
+  const [nextPageToken, setNextPageToken] = useState(null);
 
   const listImages = images.map((image) => imageEntry(image));
+
+  async function getMoreImages(id, token) {
+    if (!nextPageToken) {
+      return;
+    }
+
+    try {
+      const fetchedImages = await galleryService.getAlbum(id, token);
+
+      console.log(fetchedImages);
+
+      setImages([...images, ...fetchedImages.mediaItems]);
+      setNextPageToken(fetchedImages.nextPageToken);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     (async () => {
       try {
-        const fetchedImages = await galleryService.getAlbum(albumId);
+        const fetchedImages = await galleryService.getAlbum(albumId, null);
 
         console.log(fetchedImages);
 
         setImages(fetchedImages.mediaItems);
         setImageCount(fetchedImages.mediaItemsCount);
         setAlbumName(fetchedImages.title);
+        setNextPageToken(fetchedImages.nextPageToken);
       } catch (error) {
         console.error(error);
       }
@@ -38,6 +57,8 @@ const Album = () => {
       <h1>{albumName} ({imageCount})</h1>
 
       {listImages}
+
+      <button type="button" onClick={() => getMoreImages(albumId, nextPageToken)}>Lataa lisää</button>
     </div>
   );
 };

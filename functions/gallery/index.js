@@ -14,26 +14,44 @@ const PHOTOS_API = 'https://photoslibrary.googleapis.com/v1';
 const apiUrl = (endpoint) => `${PHOTOS_API}/${endpoint}`;
 
 app.get('/albums', async (req, res) => {
-  const url = apiUrl('albums');
-  const photosRes = await galleryClient.request({ url });
+  try {
+    const { pageToken } = req.query;
 
-  res.send(photosRes.data);
+    const url = pageToken
+      ? apiUrl(`albums?pageToken=${pageToken}`)
+      : apiUrl('albums');
+
+    const photosRes = await galleryClient.request({ url });
+
+    res.send(photosRes.data);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
-app.get('/albums/:id', async (req, res) => {
-  const albumId = req.params.id;
+app.get('/albums/:albumId', async (req, res) => {
+  try {
+    const { albumId } = req.params;
+    const { pageToken } = req.query;
 
-  const albumRes = await galleryClient.request({
-    url: apiUrl(`albums/${albumId}`),
-  });
+    const albumRes = pageToken
+      ? { data: null }
+      : await galleryClient.request({
+        url: apiUrl(`albums/${albumId}`),
+      });
 
-  const photosRes = await galleryClient.request({
-    url: apiUrl('mediaItems:search'),
-    method: 'post',
-    data: { albumId },
-  });
+    const photosRes = await galleryClient.request({
+      url: apiUrl('mediaItems:search'),
+      method: 'post',
+      data: pageToken
+        ? { albumId, pageToken, pageSize: 100 }
+        : { albumId, pageSize: 100 },
+    });
 
-  res.send({ ...albumRes.data, ...photosRes.data });
+    res.send({ ...albumRes.data, ...photosRes.data });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 module.exports = app;

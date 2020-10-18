@@ -19,7 +19,7 @@ const Gallery = () => {
   useEffect(() => {
     (async () => {
       try {
-        const fetchedAlbums = await galleryService.list();
+        const fetchedAlbums = await galleryService.list(null);
 
         setAlbums(fetchedAlbums);
       } catch (error) {
