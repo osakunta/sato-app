@@ -5,9 +5,10 @@ import galleryService from 'services/gallery';
 
 function albumEntry(album) {
   return (
-    <li key={album.id}>
-      <Link to={`/gallery/${album.id}`}>{album.title}</Link>
-    </li>
+    <Link key={album.id} to={`/gallery/${album.id}`}>
+      <img src={album.coverPhotoBaseUrl} alt={album.title} />
+      {album.title}
+    </Link>
   );
 }
 
@@ -20,6 +21,8 @@ const Gallery = () => {
     (async () => {
       try {
         const fetchedAlbums = await galleryService.list(null);
+
+        console.log(fetchedAlbums);
 
         setAlbums(fetchedAlbums);
       } catch (error) {
