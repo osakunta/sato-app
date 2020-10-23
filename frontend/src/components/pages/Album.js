@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import Gallery from 'react-photo-gallery';
 import FsLightbox from 'fslightbox-react';
 
 import Button from 'components/basic/Button';
@@ -49,25 +50,18 @@ const Album = () => {
     });
   }
 
-  function imageEntry(image, index) {
-    return (
-      <button
-        type="button"
-        onClick={() => openLightboxOnSlide(index + 1)}
-        style={{ background: 'none', border: 'none' }}
-      >
-        <img
-          key={image.id}
-          alt={image.filename}
-          src={`${image.baseUrl}=h256`}
-          style={{ margin: '5px' }}
-        />
-      </button>
-    );
-  }
+  const openPhoto = (event, { index }) => {
+    openLightboxOnSlide(index + 1);
+  };
 
-  const listImages = images.map((image, index) => imageEntry(image, index));
   const imageUrls = images.map((image) => `${image.baseUrl}=h${window.screen.height}`);
+  const photos = images.map((image) => {
+    return {
+      src: `${image.baseUrl}=h256`,
+      width: Number(image.mediaMetadata.width),
+      height: Number(image.mediaMetadata.height),
+    };
+  });
 
   useEffect(() => {
     (async () => {
@@ -92,7 +86,7 @@ const Album = () => {
 
       <div style={{ textAlign: 'center' }}>
         <div>
-          {listImages}
+          <Gallery photos={photos} onClick={openPhoto} />
           <FsLightbox
             toggler={lightboxController.toggler}
             sources={imageUrls}
