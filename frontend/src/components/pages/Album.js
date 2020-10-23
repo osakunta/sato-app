@@ -67,7 +67,7 @@ const Album = () => {
   }
 
   const listImages = images.map((image, index) => imageEntry(image, index));
-  const imageUrls = images.map((image) => image.baseUrl);
+  const imageUrls = images.map((image) => `${image.baseUrl}=h${window.screen.height}`);
 
   useEffect(() => {
     (async () => {
